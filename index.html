@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equivalencias Lógicas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .input-section {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #FF9800;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .variable-control {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .variable-control label {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .toggle-btn.active {
+            background: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .equivalence-section {
+            background: rgba(255, 255, 255, 0.15);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .equivalence-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .formula {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .calculation-result {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .result-expression {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+
+        .result-value {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        .true-value {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .false-value {
+            background: #f44336;
+            color: white;
+        }
+
+        .equivalence-check {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .equivalent {
+            background: rgba(76, 175, 80, 0.3);
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+        }
+
+        .not-equivalent {
+            background: rgba(244, 67, 54, 0.3);
+            border: 2px solid #f44336;
+            color: #f44336;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 30px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .calculate-btn {
+            background: #FF9800;
+            font-size: 16px;
+            padding: 12px 30px;
+            margin: 20px 10px;
+        }
+
+        .calculate-btn:hover {
+            background: #F57C00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 EQUIVALENCIAS LÓGICAS INTERACTIVAS</h1>
+        
+        <!-- Sección de entrada de valores -->
+        <div class="input-section">
+            <h2 style="text-align: center; margin-bottom: 20px;">📝 Ingresa los valores de P y Q</h2>
+            
+            <div class="input-group">
+                <div class="variable-control">
+                    <label>Variable P:</label>
+                    <div class="toggle-container">
+                        <button class="toggle-btn" id="p-false" onclick="setVariable('p', false)">FALSO</button>
+                        <button class="toggle-btn active" id="p-true" onclick="setVariable('p', true)">VERDADERO</button>
+                    </div>
+                </div>
+                
+                <div class="variable-control">
+                    <label>Variable Q:</label>
+                    <div class="toggle-container">
+                        <button class="toggle-btn" id="q-false" onclick="setVariable('q', false)">FALSO</button>
+                        <button class="toggle-btn active" id="q-true" onclick="setVariable('q', true)">VERDADERO</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="calculate-btn" onclick="calcularEquivalencia()">🔥 CALCULAR EQUIVALENCIA</button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="seleccionarEquivalencia(1)">1. Doble Negación</button>
+            <button onclick="seleccionarEquivalencia(2)">2. Conmutativa (∧)</button>
+            <button onclick="seleccionarEquivalencia(3)">3. Conmutativa (∨)</button>
+            <button onclick="seleccionarEquivalencia(4)">4. Morgan (∨)</button>
+            <button onclick="seleccionarEquivalencia(5)">5. Morgan (∧)</button>
+            <button onclick="seleccionarEquivalencia(6)">6. Neg. Implicación</button>
+            <button onclick="seleccionarEquivalencia(7)">7. Implicación</button>
+            <button onclick="seleccionarEquivalencia(8)">8. Contrarrecíproco</button>
+            <button onclick="seleccionarEquivalencia(9)">9. Bicondicional</button>
+        </div>
+
+        <div id="contenido">
+            <p style="text-align: center; font-size: 18px;">
+                1️⃣ Selecciona una equivalencia<br>
+                2️⃣ Ajusta los valores de P y Q<br>
+                3️⃣ Haz clic en "CALCULAR EQUIVALENCIA" 🎯
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let valorP = true;
+        let valorQ = true;
+        let equivalenciaSeleccionada = 1;
+
+        // Operaciones lógicas básicas
+        function negar(p) {
+            return !p;
+        }
+
+        function yLogico(p, q) {
+            return p && q;
+        }
+
+        function oLogico(p, q) {
+            return p || q;
+        }
+
+        function implica(p, q) {
+            return !p || q;
+        }
+
+        function bicondicional(p, q) {
+            return (p && q) || (!p && !q);
+        }
+
+        // Función para cambiar el valor de las variables
+        function setVariable(variable, valor) {
+            if (variable === 'p') {
+                valorP = valor;
+                document.getElementById('p-true').classList.toggle('active', valor);
+                document.getElementById('p-false').classList.toggle('active', !valor);
+            } else {
+                valorQ = valor;
+                document.getElementById('q-true').classList.toggle('active', valor);
+                document.getElementById('q-false').classList.toggle('active', !valor);
+            }
+        }
+
+        // Función para seleccionar equivalencia
+        function seleccionarEquivalencia(num) {
+            equivalenciaSeleccionada = num;
+            // Resaltar el botón seleccionado
+            document.querySelectorAll('.controls button').forEach(btn => {
+                btn.style.background = '#4CAF50';
+            });
+            event.target.style.background = '#FF9800';
+        }
+
+        // Función para formatear valores
+        function formatearValor(valor) {
+            return valor ? 
+                `<span class="result-value true-value">VERDADERO</span>` : 
+                `<span class="result-value false-value">FALSO</span>`;
+        }
+
+        // Función principal para calcular equivalencia
+        function calcularEquivalencia() {
+            const contenido = document.getElementById('contenido');
+            let html = '';
+
+            const equivalencias = {
+                1: {
+                    titulo: '1. DOBLE NEGACIÓN',
+                    formula: '¬¬p ⇐⇒ p',
+                    expr1: () => negar(negar(valorP)),
+                    expr1_text: '¬¬p',
+                    expr2: () => valorP,
+                    expr2_text: 'p',
+                    usaQ: false
+                },
+                2: {
+                    titulo: '2. LEY CONMUTATIVA (CONJUNCIÓN)',
+                    formula: '(p ∧ q) ⇐⇒ (q ∧ p)',
+                    expr1: () => yLogico(valorP, valorQ),
+                    expr1_text: 'p ∧ q',
+                    expr2: () => yLogico(valorQ, valorP),
+                    expr2_text: 'q ∧ p',
+                    usaQ: true
+                },
+                3: {
+                    titulo: '3. LEY CONMUTATIVA (DISYUNCIÓN)',
+                    formula: '(p ∨ q) ⇐⇒ (q ∨ p)',
+                    expr1: () => oLogico(valorP, valorQ),
+                    expr1_text: 'p ∨ q',
+                    expr2: () => oLogico(valorQ, valorP),
+                    expr2_text: 'q ∨ p',
+                    usaQ: true
+                },
+                4: {
+                    titulo: '4. LEY DE MORGAN (DISYUNCIÓN)',
+                    formula: '¬(p ∨ q) ⇐⇒ (¬p ∧ ¬q)',
+                    expr1: () => negar(oLogico(valorP, valorQ)),
+                    expr1_text: '¬(p ∨ q)',
+                    expr2: () => yLogico(negar(valorP), negar(valorQ)),
+                    expr2_text: '(¬p ∧ ¬q)',
+                    usaQ: true
+                },
+                5: {
+                    titulo: '5. LEY DE MORGAN (CONJUNCIÓN)',
+                    formula: '¬(p ∧ q) ⇐⇒ (¬p ∨ ¬q)',
+                    expr1: () => negar(yLogico(valorP, valorQ)),
+                    expr1_text: '¬(p ∧ q)',
+                    expr2: () => oLogico(negar(valorP), negar(valorQ)),
+                    expr2_text: '(¬p ∨ ¬q)',
+                    usaQ: true
+                },
+                6: {
+                    titulo: '6. NEGACIÓN DE LA IMPLICACIÓN',
+                    formula: '¬(p ⊃ q) ⇐⇒ (p ∧ ¬q)',
+                    expr1: () => negar(implica(valorP, valorQ)),
+                    expr1_text: '¬(p → q)',
+                    expr2: () => yLogico(valorP, negar(valorQ)),
+                    expr2_text: '(p ∧ ¬q)',
+                    usaQ: true
+                },
+                7: {
+                    titulo: '7. DEFINICIÓN DE IMPLICACIÓN',
+                    formula: 'p ⊃ q ⇐⇒ (¬p ∨ q)',
+                    expr1: () => implica(valorP, valorQ),
+                    expr1_text: 'p → q',
+                    expr2: () => oLogico(negar(valorP), valorQ),
+                    expr2_text: '(¬p ∨ q)',
+                    usaQ: true
+                },
+                8: {
+                    titulo: '8. CONTRARRECÍPROCO',
+                    formula: '(p ⊃ q) ⇐⇒ (¬q ⊃ ¬p)',
+                    expr1: () => implica(valorP, valorQ),
+                    expr1_text: '(p → q)',
+                    expr2: () => implica(negar(valorQ), negar(valorP)),
+                    expr2_text: '(¬q → ¬p)',
+                    usaQ: true
+                },
+                9: {
+                    titulo: '9. PRINCIPIO DE DOBLE IMPLICACIÓN',
+                    formula: '(p ⇐⇒ q) ⇐⇒ (p ⊃ q) ∧ (q ⊃ p)',
+                    expr1: () => bicondicional(valorP, valorQ),
+                    expr1_text: '(p ↔ q)',
+                    expr2: () => yLogico(implica(valorP, valorQ), implica(valorQ, valorP)),
+                    expr2_text: '(p → q) ∧ (q → p)',
+                    usaQ: true
+                }
+            };
+
+            const eq = equivalencias[equivalenciaSeleccionada];
+            
+            if (eq) {
+                const resultado1 = eq.expr1();
+                const resultado2 = eq.expr2();
+                const sonEquivalentes = resultado1 === resultado2;
+
+                html = `
+                    <div class="equivalence-section">
+                        <div class="equivalence-title">${eq.titulo}</div>
+                        <div class="formula">${eq.formula}</div>
+                        
+                        <div class="calculation-result">
+                            <h3 style="text-align: center; margin-bottom: 20px;">🧮 VALORES ACTUALES:</h3>
+                            
+                            <div style="text-align: center; margin: 15px 0; font-size: 18px;">
+                                <strong>P = ${valorP ? 'VERDADERO' : 'FALSO'}</strong>
+                                ${eq.usaQ ? ` | <strong>Q = ${valorQ ? 'VERDADERO' : 'FALSO'}</strong>` : ''}
+                            </div>
+                            
+                            <div class="result-row">
+                                <span class="result-expression">${eq.expr1_text}</span>
+                                ${formatearValor(resultado1)}
+                            </div>
+                            
+                            <div class="result-row">
+                                <span class="result-expression">${eq.expr2_text}</span>
+                                ${formatearValor(resultado2)}
+                            </div>
+                            
+                            <div class="equivalence-check ${sonEquivalentes ? 'equivalent' : 'not-equivalent'}">
+                                ${sonEquivalentes ? '✅ SON EQUIVALENTES' : '❌ NO SON EQUIVALENTES'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            contenido.innerHTML = html;
+        }
+
+        // Inicializar con la primera equivalencia
+        window.onload = function() {
+            seleccionarEquivalencia(1);
+            calcularEquivalencia();
+        }
+    </script>
+</body>
+</html>
