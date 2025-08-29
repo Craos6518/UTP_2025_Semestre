@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equivalencias Lógicas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🧠 EQUIVALENCIAS LÓGICAS INTERACTIVAS</h1>
+
+      <!-- Sección de entrada de valores -->
+      <div class="input-section">
+        <h2 style="text-align: center; margin-bottom: 20px">
+          📝 Ingresa los valores de P y Q
+        </h2>
+
+        <div class="input-group">
+          <div class="variable-control">
+            <label>Variable P:</label>
+            <div class="toggle-container">
+              <button
+                class="toggle-btn"
+                id="p-false"
+                aria-pressed="false"
+                onclick="setVariable('p', false)"
+              >
+                FALSO
+              </button>
+              <button
+                class="toggle-btn active"
+                id="p-true"
+                aria-pressed="true"
+                onclick="setVariable('p', true)"
+              >
+                VERDADERO
+              </button>
+            </div>
+          </div>
+
+          <div class="variable-control">
+            <label>Variable Q:</label>
+            <div class="toggle-container">
+              <button
+                class="toggle-btn"
+                id="q-false"
+                aria-pressed="false"
+                onclick="setVariable('q', false)"
+              >
+                FALSO
+              </button>
+              <button
+                class="toggle-btn active"
+                id="q-true"
+                aria-pressed="true"
+                onclick="setVariable('q', true)"
+              >
+                VERDADERO
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center">
+          <button class="calculate-btn" onclick="calcularEquivalencia()">
+            🔥 CALCULAR EQUIVALENCIA
+          </button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button onclick="seleccionarEquivalencia(1,this)">
+          1. Doble Negación
+        </button>
+        <button onclick="seleccionarEquivalencia(2,this)">
+          2. Conmutativa (∧)
+        </button>
+        <button onclick="seleccionarEquivalencia(3,this)">
+          3. Conmutativa (∨)
+        </button>
+        <button onclick="seleccionarEquivalencia(4,this)">4. Morgan (∨)</button>
+        <button onclick="seleccionarEquivalencia(5,this)">5. Morgan (∧)</button>
+        <button onclick="seleccionarEquivalencia(6,this)">
+          6. Neg. Implicación
+        </button>
+        <button onclick="seleccionarEquivalencia(7,this)">
+          7. Implicación
+        </button>
+        <button onclick="seleccionarEquivalencia(8,this)">
+          8. Contrarrecíproco
+        </button>
+        <button onclick="seleccionarEquivalencia(9,this)">
+          9. Bicondicional
+        </button>
+      </div>
+
+      <div id="contenido">
+        <p style="text-align: center; font-size: 18px">
+          1️⃣ Selecciona una equivalencia<br />
+          2️⃣ Ajusta los valores de P y Q<br />
+          3️⃣ Haz clic en "CALCULAR EQUIVALENCIA" 🎯
+        </p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
